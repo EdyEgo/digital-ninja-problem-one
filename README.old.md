@@ -1,1 +1,0 @@
-# digital-ninja-problem-one
