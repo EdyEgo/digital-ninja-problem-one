@@ -9,7 +9,10 @@ const NavBar: React.FC<NavBarProps> = () => {
     (state: any) => state.shop.checkedItemsNumber
   );
   const dispatch = useDispatch();
-  const cartItems = useSelector((state: any) => state.shop.cartItems);
+  //   const cartItems = useSelector((state: any) => state.shop.cartItems);
+
+  const itemsList = useSelector((state: any) => state.shop.shopItems);
+
   const cartDropDownIsOpen = useSelector(
     (state: any) => state.shop.cartDropDownIsOpen
   );
@@ -25,17 +28,11 @@ const NavBar: React.FC<NavBarProps> = () => {
         <div>{checkedItems}</div>
       </div>
       <div className="drop-down-menu">
-        {cartItems.length >= 1 &&
-          cartDropDownIsOpen &&
-          cartItems.map((item: any, index: number) => {
-            return (
-              <Item
-                item={item}
-                index={item.index}
-                key={item.id}
-                useCartIndex={index}
-              />
-            );
+        {cartDropDownIsOpen &&
+          itemsList.map((item: any, index: number) => {
+            if (item.checked) {
+              return <Item item={item} index={index} key={item.id} />;
+            }
           })}
       </div>
     </>

@@ -1,6 +1,6 @@
 import {createSlice } from '@reduxjs/toolkit'
 
-const initialState:{shopItems:any[],cartDropDownIsOpen:boolean,checkedItemsNumber:number,cartItems:any[]} = {
+const initialState:{shopItems:any[],cartDropDownIsOpen:boolean,checkedItemsNumber:number} = {
        cartDropDownIsOpen:false,
        checkedItemsNumber:0,
        shopItems :[
@@ -29,7 +29,7 @@ const initialState:{shopItems:any[],cartDropDownIsOpen:boolean,checkedItemsNumbe
           checked:false
         },
       ] ,
-      cartItems:[],
+      
 } 
 
 
@@ -55,17 +55,18 @@ export const shopSlice = createSlice({
         
         state.shopItems[itemIndex].checked = !state.shopItems[itemIndex].checked
 
-        state.cartItems.push({...state.shopItems[itemIndex],index:itemIndex})
+      
 
       
        },
        removeItemFromCart(state,{payload}){
 
         const itemIndex = payload.itemIndex
-        const cartIndex = payload.cartIndex
        
+        
+    
 
-        if(cartIndex) state.cartItems.splice(cartIndex,1)
+       
         
 
         state.checkedItemsNumber -=  1
