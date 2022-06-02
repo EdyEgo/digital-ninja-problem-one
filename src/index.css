@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .no-pointer-events{
    pointer-events: none;
@@ -30,4 +32,22 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.drop-down-menu{
+    position:absolute;
+    
+
+} 
+
+.drop-down-menu{
+    position:absolute;
+    border:1px solid black;
+}
+
+.nav-bar-container{
+    display:flex;
+}
+.nav-bar-container{
+    cursor:pointer;
 }

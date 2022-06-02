@@ -1,33 +1,35 @@
 import {createSlice } from '@reduxjs/toolkit'
 
-const initialState:{shopItems:any[],checkedItemsNumber:number} = {
+const initialState:{shopItems:any[],cartDropDownIsOpen:boolean,checkedItemsNumber:number,cartItems:any[]} = {
+       cartDropDownIsOpen:false,
        checkedItemsNumber:0,
        shopItems :[
         {
           id: 1,
-          name: "Alice",
-          city: "Bucharest",
+          name: "Branza",
+          
           checked:false
         },
         {
           id: 2,
-          name: "Bob",
-          city: "Belgrade",
+          name: "Oua",
+       
           checked:false
         },
         {
           id: 3,
-          name: "Charlie",
-          city: "Budapest",
+          name: "Varza",
+       
           checked:false
         },
         {
           id: 4,
-          name: "Dan",
-          city: "Bucharest",
+          name: "Cuie lemn",
+         
           checked:false
         },
-      ]
+      ] ,
+      cartItems:[],
 } 
 
 
@@ -39,19 +41,38 @@ export const shopSlice = createSlice({
     name:'shop',
     initialState,
     reducers:{
+      
+      changeDropDownMenuState(state){
+        state.cartDropDownIsOpen = !state.cartDropDownIsOpen
+      },
+      
+       addItemToCart(state,{payload}){
+        const itemIndex = payload.itemIndex
+        
+      
+      
+          state.checkedItemsNumber +=  1
+        
+        state.shopItems[itemIndex].checked = !state.shopItems[itemIndex].checked
 
-       changeCheckedOnItem(state,{payload}){
-           const itemIndex = payload
-           if(state.shopItems[itemIndex].checked) {
-             // was previously checked 
-             state.checkedItemsNumber -=  1
-           }
-           if(!state.shopItems[itemIndex].checked){
-             // was previously not checked 
-             state.checkedItemsNumber +=  1
-           }
-           state.shopItems[itemIndex].checked = !state.shopItems[itemIndex].checked
+        state.cartItems.push({...state.shopItems[itemIndex]})
+
+      
+       },
+       removeItemFromCart(state,{payload}){
+
+        const itemIndex = payload.itemIndex
+        const itemToDelete = payload.item
+
+        const findIndexItemInCart = state.cartItems.findIndex(item=>item === itemToDelete)
+            
+        state.cartItems.splice(findIndexItemInCart,1)
+
+        state.checkedItemsNumber -=  1
            
+   
+
+        state.shopItems[itemIndex].checked = !state.shopItems[itemIndex].checked
        }
 
       
@@ -60,6 +81,6 @@ export const shopSlice = createSlice({
 
 })
 
-export const { changeCheckedOnItem} = shopSlice.actions
+export const { changeDropDownMenuState, addItemToCart , removeItemFromCart} = shopSlice.actions
 
 export default shopSlice.reducer
