@@ -12,21 +12,29 @@ function App() {
   return (
     <div className="App ">
       <Nav />
+      <h1 className="title">Shop Items:</h1>
       <div className="shop-items items-center">
         {itemsList.map((item: any, index: number) => {
           return (
             <div
               className="item cursor-pointer"
+              key={item.id}
               onClick={() => {
                 changeItemsCheckedstatus(index);
               }}
             >
               <span className="name no-pointer-events"> {item.name} </span>
               {item.checked && (
-                <span className="no-pointer-events">Check &#10004;</span>
+                <div className="container-checked">
+                  <div className="no-pointer-events">Check </div>
+                  <div>&#10004;</div>
+                </div>
               )}
               {item.checked === false && (
-                <span className="no-pointer-events">Uncheck x</span>
+                <div className="container-checked">
+                  <div className="no-pointer-events">Uncheck </div>
+                  <div>x</div>
+                </div>
               )}
             </div>
           );
