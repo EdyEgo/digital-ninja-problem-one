@@ -28,7 +28,7 @@ const NavBar: React.FC<NavBarProps> = () => {
         {cartItems.length >= 1 &&
           cartDropDownIsOpen &&
           cartItems.map((item: any, index: number) => {
-            return <Item item={item} index={index} key={item.id + "cart"} />;
+            return <Item item={item} index={item.index} key={item.id} />;
           })}
       </div>
     </>

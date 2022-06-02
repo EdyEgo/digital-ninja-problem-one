@@ -11,7 +11,7 @@ function App() {
       <h1 className="title">Shop Items:</h1>
       <div className="shop-items items-center">
         {itemsList.map((item: any, index: number) => {
-          return <Item item={item} index={index} key={item.id + "app"} />;
+          return <Item item={item} index={index} key={item.id} />;
         })}
       </div>
     </div>

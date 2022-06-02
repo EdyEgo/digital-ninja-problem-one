@@ -55,18 +55,17 @@ export const shopSlice = createSlice({
         
         state.shopItems[itemIndex].checked = !state.shopItems[itemIndex].checked
 
-        state.cartItems.push({...state.shopItems[itemIndex]})
+        state.cartItems.push({...state.shopItems[itemIndex],index:itemIndex})
 
       
        },
        removeItemFromCart(state,{payload}){
 
         const itemIndex = payload.itemIndex
-        const itemToDelete = payload.item
+        const itemToDelete = payload.item.index
 
-        const findIndexItemInCart = state.cartItems.findIndex(item=>item === itemToDelete)
-            
-        state.cartItems.splice(findIndexItemInCart,1)
+        
+        state.cartItems.splice(itemToDelete,1)
 
         state.checkedItemsNumber -=  1
            
