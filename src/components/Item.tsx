@@ -4,18 +4,25 @@ import { addItemToCart, removeItemFromCart } from "../store/shop";
 interface ItemProps {
   item: any;
   index: number;
+  useCartIndex?: number;
 }
 
-const ItemComponent: React.FC<ItemProps> = ({ item, index }) => {
+const ItemComponent: React.FC<ItemProps> = ({ item, index, useCartIndex }) => {
   const dispatch = useDispatch();
 
   function changeItemsCheckedstatus(
     isChecked: boolean,
     item: any,
-    index: number
+    index: number,
+    cartIndex?: number
   ) {
     if (!isChecked) {
       dispatch(addItemToCart({ itemIndex: index }));
+      return;
+    }
+    if (cartIndex) {
+      dispatch(removeItemFromCart({ itemIndex: index, item, cartIndex }));
+
       return;
     }
     dispatch(removeItemFromCart({ itemIndex: index, item }));
@@ -25,7 +32,7 @@ const ItemComponent: React.FC<ItemProps> = ({ item, index }) => {
     <div
       className="item cursor-pointer"
       onClick={() => {
-        changeItemsCheckedstatus(item.checked, item, index);
+        changeItemsCheckedstatus(item.checked, item, index, useCartIndex);
       }}
     >
       <span className="name no-pointer-events"> {item.name} </span>
