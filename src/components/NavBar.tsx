@@ -9,7 +9,7 @@ const NavBar: React.FC<NavBarProps> = () => {
     (state: any) => state.shop.checkedItemsNumber
   );
   const dispatch = useDispatch();
-  //   const cartItems = useSelector((state: any) => state.shop.cartItems);
+
 
   const itemsList = useSelector((state: any) => state.shop.shopItems);
 
